@@ -34,7 +34,7 @@ report on all anomolies with as much detail as seems pertinent.
 Sample output:
 
 ```
-[DFHack]# show-imposter
+[DFHack]# show-imposters
 ** Imposter found! Current alias: `vampire' Rashcog (Dwarf)
   - `vampire' Oddomled Stelidshasar is their real name.
   - Additionally:
