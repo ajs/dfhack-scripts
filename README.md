@@ -26,7 +26,7 @@ Find any unattended items that have flags that prevent being picked up
 This script tries its best, but there are some reasons that things
 are inaccessible that it cannot yet detect or control.
 
-### show-imposters
+### `show-imposters`
 
 Search all units for those that are hiding their identities, then
 report on all anomolies with as much detail as seems pertinent.
@@ -62,7 +62,7 @@ Sample output:
   - * age: 73.9
 ```
 
-### show-military-unit
+### `show-military-unit`
 
 A work-in-progress. I'm attempting to come up with a way to quickly navigate from the military
 "positions" screen to the view-unit screen...
