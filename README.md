@@ -31,12 +31,22 @@ are inaccessible that it cannot yet detect or control.
 Search all units for those that are hiding their identities, then
 report on all anomolies with as much detail as seems pertinent.
 
+Usage:
+
+```
+show-imposters [-living] [-dead] [-vampire] [-inactive]
+    -living - show only living imposters
+    -dead - show only dead imposters
+    -vampire - show only vampires
+    -inactive - include inactive units
+```
+
 Sample output:
 
 ```
 [DFHack]# show-imposters
-** Imposter found! Current alias: `vampire' Rashcog (Dwarf)
-  - `vampire' Oddomled Stelidshasar is their real name.
+** Imposter found! Current alias: Rashcog (Dwarf)
+  - Oddomled Stelidshasar is their real name.
   - Additionally:
   - * hides the nature of their curse
   - * crazed
