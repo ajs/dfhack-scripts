@@ -4,9 +4,9 @@
 --
 -- Sample output:
 --
--- [DFHack]# show-imposter
--- ** Imposter found! Current alias: `vampire' Rashcog (Dwarf)
---   - `vampire' Oddomled Stelidshasar is their real name.
+-- [DFHack]# show-imposters
+-- ** Imposter found! Current alias: Rashcog (Dwarf)
+--   - Oddomled Stelidshasar is their real name.
 --   - Additionally:
 --   - * hides the nature of their curse
 --   - * crazed
@@ -26,7 +26,6 @@
 --** Imposter found! Current alias: Anir Adegom (Human)
 --   - Sudem Struslotehil is their real name.
 --   - Additionally:
---   - * active
 --   - * alive
 --   - * visitor
 --   - * age: 73.9
@@ -58,10 +57,11 @@ local function usage()
     -----
     -- Print usage message
 
-    print("Usage: show-imposters [-living] [-dead] [-vampire]")
+    print("Usage: show-imposters [-living] [-dead] [-vampire] [-inactive]")
     print("  -living - show only living imposters")
     print("  -dead - show only dead imposters")
     print("  -vampire - show only vampires")
+    print("  -inactive - include inactive units")
 end
 
 local function print_alias_info(unit, alias)
@@ -140,7 +140,7 @@ local function main(...)
 
     local utils = require 'utils'
 
-    local valid_opts = utils.invert({"help", "living", "dead", "vampire"})
+    local valid_opts = utils.invert({"help", "living", "dead", "vampire", "inactive"})
     local args = utils.processArgs({...}, valid_opts)
 
     if args.help then
@@ -148,17 +148,24 @@ local function main(...)
         return
     end
 
-    local living = args.living
-    local dead = args.dead
-    local vampire = args.vampire
+    local only_living = args.living
+    local only_dead = args.dead
+    local only_vampire = args.vampire
+    local include_inactive = args.inactive
 
     local imp_count = 0
     for _,unit in ipairs(df.global.world.units.all) do
         local alive = dfhack.units.isAlive(unit)
         local bloodsucker = dfhack.units.isBloodsucker(unit)
+        local active = dfhack.units.isActive(unit)
         local alias = dfhack.units.getIdentity(unit)
 
-        arg_restricted = (living and not alive) or (dead and alive) or (vampire and not bloodsucker)
+        arg_restricted = (
+            (only_living and not alive) or
+            (only_dead and alive) or
+            (only_vampire and not bloodsucker) or
+            (not include_inactive and not active)
+        )
 
         if alias and not arg_restricted then
             print_alias_info(unit, alias)
