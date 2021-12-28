@@ -79,6 +79,13 @@ local function summarize_unit(unit)
     if alias then
         alias_name = dfhack.TranslateName(alias.name)
     end
+    local soul_name
+    local current_soul = unit.status.current_soul
+    if current_soul then
+        soul_name = dfhack.TranslateName(current_soul.name)
+    else
+        soul_name = "*no current_soul*"
+    end
 
     return {
         unit = unit,
