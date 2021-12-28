@@ -105,7 +105,7 @@ local function summarize_unit(unit)
         race_name = titlecase(get_race(unit)),
         real_age = round(dfhack.units.getAge(unit, true), 1),
         real_name = dfhack.TranslateName(unit.name),
-        soul_name = dfhack.TranslateName(unit.status.current_soul.name),
+        soul_name = soul_name
     }
 
 end
